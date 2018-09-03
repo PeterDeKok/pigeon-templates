@@ -1,0 +1,28 @@
+{
+    "name": "peterdekok/pigeon-templates",
+    "description": "Templating wrapper using a hierarchical recursive concept. Laravel's (Eloquent) Model relationships are used to have a tree of defaults to fallback upon. Directives are used to look for (nested) template parts.",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Peter de Kok",
+            "email": "info@peterdekok.nl"
+        }
+    ],
+    "require": {
+        "laravel/framework": "^5.2",
+        "illuminate/support": "^5.2"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "PeterDeKok\\PigeonTemplates\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "PeterDeKok\\PigeonTemplates\\PigeonTemplatesServiceProvider"
+            ]
+        }
+    }
+}
