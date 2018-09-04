@@ -2,9 +2,9 @@
 
 Templating wrapper using a hierarchical recursive concept. 
 Laravel's (Eloquent) Model relations are used to recursively retrieve templates. 
-If the current model does not have a template for a template part, the parent model is checked. 
+If the current model does not have a template for a template part, the parent model is tried. 
 
-Directives are used to include (nested) template parts. 
+A directive is used to include (nested) template parts. 
 This approach limits duplication in templates. 
 All boilerplate only has to be stored once. 
 And only the varying parts have multiple entries.
@@ -17,7 +17,7 @@ Supports at least Laravel 5.6, untested for any other versions.
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [Support](#support)
-- [Contributing](#contributing)
+- [Contributing](#feature-requests--contributions)
 
 ## Installation
 
@@ -43,7 +43,7 @@ To explain the rest of the configuration I will use two models with two (base) t
 - A company model, which has many users
 - A PDF template and an e-mail template
 
-To add a templates to a Model, it has to implement the PigeonTemplateContract. 
+To add templates to a Model, it has to implement the PigeonTemplateContract. 
 This can be easily done by adding the HasPigeonTemplates trait.
 (Don't forget to add the interface as well).
 
@@ -59,7 +59,7 @@ use PeterDeKok\PigeonTemplates\HasPigeonTemplates;
 use PeterDeKok\PigeonTemplates\PigeonTemplatesContract;
 
 /**
-* Class User
+ * Class User
  * 
  * @property-read \App\Models\Company $company
  * @mixin \Eloquent
@@ -82,7 +82,7 @@ class User extends Model implements PigeonTemplatesContract {
 }
 
 /**
-* Class Company
+ * Class Company
  * 
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
  * @mixin \Eloquent
@@ -158,7 +158,7 @@ For example:
 The `@template("templatepart")` directive holds the magic so to speak. 
 The `templatepart` parameter should be one of the predefined template parts in the config.
 
-This is a list containing the names of the template parts with their corresponding content-types and a default value.
+This list in the config contains the names of the template parts with their corresponding content-types and a default value.
 The default value can be as simple as an empty string, but I highly recommend setting a sensible default. 
 If any of the top level models do not have a template linked, only an empty string would be rendered 
 (if ignore-errors is set to true).
@@ -171,7 +171,8 @@ If any of the top level models do not have a template linked, only an empty stri
 ## Usage
 
 When the Template parts and some sensible defaults have been set, you can start rendering.
-Well, full disclosure, you could skip the configuration and start here right away. 
+
+Well ... full disclosure ... you could skip the configuration and start right away. 
 The result would only be boring examples though.
 
 So, this is how you do it:
@@ -211,8 +212,24 @@ $rendered = $user->renderPigeon();
 
 ## Support
 
-Please [open an issue](https://github.com/peterdekok/pigeon-templates/issues/new) for support.
+Please [open an issue](https://github.com/PeterDeKok/pigeon-templates/issues/new/choose) for support.
 
-## Contributing
+## Feature Requests & Contributions
 
-Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/peterdekok/pigeon-templates/compare/).
+I will accept feature requests. please do so by [opening an issue](https://github.com/PeterDeKok/pigeon-templates/issues/new/choose).
+
+Depending on the number of feature requests and bug reports I might not be able to spend time on this issue 
+(at least in a timely fashion). Also a life outside of templates will take some time away. 
+
+Another option is to send me a pull-request. I recommend creating a feature request first though, 
+so the intended fix/feature can be discussed first. 
+
+I will definitely be open to collaborators, but I reserve the right to refuse pull-requests 
+if they lead me in a different path then intended.
+
+Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). 
+
+ - [ ] Clone the repo 
+ - [ ] create a new branch (starting from the current develop branch)
+ - [ ] add commits
+ - [ ] [open a pull request](https://github.com/peterdekok/pigeon-templates/compare/)
